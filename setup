@@ -2,25 +2,14 @@
 echo "Cloning repos"
 git clone https://github.com/fablab-luenen/dokuwiki-preconfigured
 
-# dokuwiki-preconfigured
-mkdir dokuwiki-preconfigured/data
-ln -s dokuwiki-preconfigured/data data
-
 # Krypton
-mkdir -p data/dokuwiki/lib/tpl/krypton
-ln -s data/dokuwiki/lib/tpl/krypton krypton
+rm -rf krypton
 git clone https://github.com/fablab-luenen/dokuwiki-krypton krypton
+(cd krypton; npx sass assets/css/doku.scss assets/css/doku.css)
 
 # Visual Editor
-mkdir -p data/dokuwiki/lib/plugins/prosemirror
-ln -s data/dokuwiki/lib/plugins/prosemirror visual-editor
-git clone https://github.com/fablab-luenen/dokuwiki-visual-editor visual-editor
-
-# Install dependencies
-(cd visual-editor; npx yarn install)
-
-# Compile once to get a runnable result and have all development dependencies
-(cd visual-editor; npx yarn build)
-(cd krypton; npx sass assets/css/doku.scss assets/css/doku.css)
+# rm -rf visual-editor
+# git clone https://github.com/fablab-luenen/dokuwiki-visual-editor visual-editor
+# (cd visual-editor; npx yarn install && npx yarn build)
 
 echo "All set up. To develop, use ./run"

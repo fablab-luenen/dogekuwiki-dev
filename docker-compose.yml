@@ -1,0 +1,18 @@
+version: '3.2'
+services:
+  wiki:
+    build: dokuwiki-preconfigured/build/
+    ports:
+      - 8080:80
+    restart: unless-stopped
+    volumes:
+      #- ./data/:/config/
+      - /config/
+      - /app/
+      #- ./config/dokuwiki/data
+      - ./krypton:/config/dokuwiki/lib/tpl/krypton
+      #- ./visual-editor:/config/dokuwiki/lib/plugins/prosemirror
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Berlin
