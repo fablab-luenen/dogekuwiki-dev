@@ -1,0 +1,10 @@
+#!/usr/bin/env sh
+
+# Container
+(cd dokuwiki-preconfigured; docker-compose down; ./start) & # --build omitted for speed
+
+# Theme
+(cd krypton; npx sass --watch assets/css/doku.scss assets/css/doku.css) &
+
+# Visual Editor
+(cd visual-editor; npx yarn watch ) &
